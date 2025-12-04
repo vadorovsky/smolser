@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = [
+  "smolser",
+  "smolser-derive",
+]
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/vadorovsky/smolser"
+
