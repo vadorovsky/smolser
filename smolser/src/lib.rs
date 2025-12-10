@@ -66,3 +66,4 @@ unsafe impl Pod for u128 {}
 unsafe impl Pod for i128 {}
 unsafe impl Pod for f32 {}
 unsafe impl Pod for f64 {}
+unsafe impl<T: Pod, const N: usize> Pod for [T; N] {}
