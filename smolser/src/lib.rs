@@ -2,6 +2,9 @@
 
 use core::mem;
 
+#[cfg(feature = "derive")]
+pub use smolser_derive::Pod;
+
 #[derive(Debug)]
 pub enum SmolserError {
     SizeMismatch { expected: usize, len: usize },
