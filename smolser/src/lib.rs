@@ -19,10 +19,13 @@ fn validate_bytes<T: Sized>(s: &[u8]) -> Result<(), SmolserError> {
         return Err(SmolserError::SizeMismatch { expected, len });
     }
 
-    let align = mem::align_of::<T>();
-    let ptr = s.as_ptr() as usize;
-    if ptr % align != 0 {
-        return Err(SmolserError::AlignmentMismatch { align, ptr });
+    #[cfg(not(target_os = "solana"))]
+    {
+        let align = mem::align_of::<T>();
+        let ptr = s.as_ptr() as usize;
+        if ptr % align != 0 {
+            return Err(SmolserError::AlignmentMismatch { align, ptr });
+        }
     }
 
     Ok(())
