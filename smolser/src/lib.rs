@@ -54,7 +54,9 @@ pub unsafe trait Pod: Sized {
     }
 }
 
+// SAFETY: Primitive types.
 unsafe impl Pod for () {}
+unsafe impl Pod for char {}
 unsafe impl Pod for u8 {}
 unsafe impl Pod for i8 {}
 unsafe impl Pod for u16 {}
@@ -70,3 +72,9 @@ unsafe impl Pod for i128 {}
 unsafe impl Pod for f32 {}
 unsafe impl Pod for f64 {}
 unsafe impl<T: Pod, const N: usize> Pod for [T; N] {}
+
+// SAFETY: These types have the same memory layout as T.
+unsafe impl<T: Pod> Pod for core::cell::Cell<T> {}
+unsafe impl<T: Pod> Pod for core::cell::UnsafeCell<T> {}
+
+pub trait AccountExt {}
